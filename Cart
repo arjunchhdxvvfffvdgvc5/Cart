@@ -1,0 +1,65 @@
+def calculate_discounted_price(product, quantity):
+    price = product['price']
+    total_price = price * quantity
+
+    
+    if quantity > 10:
+        bulk_5_discount = total_price * 0.05
+        total_price -= bulk_5_discount
+
+    return total_price
+
+
+def apply_discount_rules(cart, total_quantity):
+    cart_total = sum([product['price'] * quantity for product, quantity in cart.items()])
+
+    
+    if cart_total > 200:
+        flat_10_discount = 10
+        cart_total -= flat_10_discount
+
+   
+    if total_quantity > 20:
+        bulk_10_discount = cart_total * 0.1
+        cart_total -= bulk_10_discount
+
+    
+    if total_quantity > 30:
+        for product, quantity in cart.items():
+            if quantity > 15:
+                tiered_50_discount = (quantity - 15) * product['price'] * 0.5
+                cart_total -= tiered_50_discount
+
+    return cart_total
+
+
+catalog = {
+    'Product A': {'price': 20},
+    'Product B': {'price': 40},
+    'Product C': {'price': 50}
+}
+
+
+cart = {}
+total_quantity = 0
+
+while True:
+    product_name = input("Enter the product name (or 'done' to finish): ")
+    if product_name == 'done':
+        break
+
+    if product_name not in catalog:
+        print("Invalid product name.")
+        continue
+
+    quantity = int(input("Enter the quantity: "))
+    if quantity <= 0:
+        print("Quantity must be a positive integer.")
+        continue
+
+    cart[product_name] = quantity
+    total_quantity += quantity
+
+cart_total = apply_discount_rules(cart, total_quantity)
+print("Cart Total:", cart_total)
+
