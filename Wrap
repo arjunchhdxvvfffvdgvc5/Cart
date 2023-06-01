@@ -6,29 +6,29 @@ def calculate_product_cost(product_name, quantity, is_gift_wrapped):
     discount_threshold = 50
     discount_percentage = 0.1
 
-    # Calculate subtotal
+    
     subtotal = unit_price * quantity
 
-    # Apply discount if applicable
+    
     if subtotal >= discount_threshold:
         discount = subtotal * discount_percentage
     else:
         discount = 0
 
-    # Calculate shipping fee
+    
     num_packages = (quantity + units_per_package - 1) // units_per_package
     shipping_fee = shipping_fee_per_package * num_packages
 
-    # Calculate gift wrap fee
+   
     if is_gift_wrapped:
         gift_wrap_fee = gift_wrap_fee * quantity
     else:
         gift_wrap_fee = 0
 
-    # Calculate total amount
+    
     total = subtotal - discount + shipping_fee + gift_wrap_fee
 
-    # Output details
+  
     print(f"Product: {product_name}")
     print(f"Quantity: {quantity}")
     print(f"Total amount: ${subtotal}")
@@ -39,7 +39,6 @@ def calculate_product_cost(product_name, quantity, is_gift_wrapped):
     print(f"Total: ${total}")
 
 
-# Main program
 product_name = input("Enter the product name: ")
 quantity = int(input("Enter the quantity: "))
 is_gift_wrapped = input("Is the product wrapped as a gift? (yes/no): ").lower() == "yes"
