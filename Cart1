@@ -1,0 +1,30 @@
+def calculate_product_cost(product_name, quantity, is_gift_wrapped):
+    gift_wrap_fee = 1
+    shipping_fee_per_package = 5
+    units_per_package = 10
+
+    total_cost = 0
+
+   
+    if is_gift_wrapped:
+        total_cost += gift_wrap_fee * quantity
+
+  
+    num_packages = (quantity + units_per_package - 1) // units_per_package
+    total_cost += shipping_fee_per_package * num_packages
+
+   
+    total_amount = quantity + total_cost
+
+   
+    print(f"Product: {product_name}")
+    print(f"Quantity: {quantity}")
+    print(f"Total amount: ${total_amount}")
+
+
+product_name = input("Enter the product name: ")
+quantity = int(input("Enter the quantity: "))
+is_gift_wrapped = input("Is the product wrapped as a gift? (yes/no): ").lower() == "yes"
+
+calculate_product_cost(product_name, quantity, is_gift_wrapped)
+
